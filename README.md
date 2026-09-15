@@ -1,47 +1,54 @@
-# Python Network Port Scanner
+# CyberScan - Python Network Port Scanner
 
-A beginner-friendly cybersecurity project written in Python that scans TCP ports on a target host and identifies commonly associated services.
+CyberScan is a beginner-friendly cybersecurity tool built with **Python and Flask** that scans TCP ports on a target system and identifies commonly associated network services.
+
+The project includes both a command-line scanner and a web-based dashboard with live scan progress.
 
 ## Features
 
-- TCP port scanning
-- Custom target IP or hostname
-- Custom port range
-- Open-port detection
-- Basic service identification
-- Input validation
+- TCP port scanning using Python socket programming
+- Custom target IP address or hostname
+- Custom starting and ending port
+- Detection of open TCP ports
+- Basic identification of commonly associated services
+- Input validation and error handling
 - Hostname resolution
-- Keyboard interrupt handling
+- Flask-based web dashboard
+- Background scanning to keep the web interface responsive
+- Live scan progress percentage
+- Current port tracking
+- Open-port counter
+- Keyboard interrupt handling in the command-line scanner
+- Responsible security-testing guidance
 
 ## Technologies Used
 
 - Python 3
+- Flask
+- HTML5
+- CSS3
+- JavaScript
 - Socket Programming
 - TCP/IP Networking
+- Git & GitHub
 
+## Project Structure
 
-## How It Works
-
-The scanner attempts to establish a TCP connection to each port in the specified range.
-
-If the connection succeeds, the port is reported as open.
-
-Common port numbers are mapped to their commonly associated services, such as:
-
-- 22 → SSH
-- 80 → HTTP
-- 443 → HTTPS
-- 3306 → MySQL
-- 8000 → HTTP Development Server
-## Screenshot
-
-![Port Scanner Output](scanner-output.png)
-
-The screenshot shows the scanner detecting an open HTTP development server on port 8000 on the local test machine.
-
-## How to Run
-
-Clone the repository:
-
-```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+```text
+python-network-port-scanner/
+│
+├── app.py
+├── scanner.py
+├── README.md
+├── scanner-output.png
+├── .gitignore
+│
+├── templates/
+│   └── index.html
+│
+└── static/
+    ├── css/
+    │   └── style.css
+    │
+    └── js/
+        └── script.js
