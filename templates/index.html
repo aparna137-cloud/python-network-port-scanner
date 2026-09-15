@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CyberScan | Network Security Scanner</title>
+
+    
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="logo">
+                CS
+            </div>
+
+            <div>
+                <h1>CyberScan</h1>
+                <p>Network Security Scanner</p>
+            </div>
+
+        </div>
+
+        <div class="status">
+            <div class="status-dot"></div>
+            Local Scanner Online
+        </div>
+
+    </header>
+
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+        <h2>
+            Network <span>Port Scanner</span>
+        </h2>
+
+        <p>
+            Discover open TCP ports and identify commonly associated
+            network services using a Python-powered security tool.
+        </p>
+
+    </section>
+
+
+    <!-- Scanner -->
+
+    <section class="card">
+
+        <h3>Configure Scan</h3>
+
+        <form method="POST">
+
+            <div class="form-grid">
+
+                <div>
+
+                    <label for="target">
+                        Target IP / Hostname
+                    </label>
+
+                    <input
+                        type="text"
+                        id="target"
+                        name="target"
+                        value="{{ target }}"
+                        placeholder="127.0.0.1"
+                        required
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label for="start_port">
+                        Start Port
+                    </label>
+
+                    <input
+                        type="number"
+                        id="start_port"
+                        name="start_port"
+                        min="1"
+                        max="65535"
+                        value="7995"
+                        required
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label for="end_port">
+                        End Port
+                    </label>
+
+                    <input
+                        type="number"
+                        id="end_port"
+                        name="end_port"
+                        min="1"
+                        max="65535"
+                        value="8005"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+                <button class="scan-button" type="submit" id="scanButton">
+                     <span id="buttonText">Start Security Scan</span>
+                    <span id="scanSpinner" class="spinner"></span>
+                </button>
+
+        </form>
+        <div id="scanProgress" class="scan-progress">
+
+    <div class="progress-header">
+        <span>Scan Progress</span>
+        <span id="progressText">0%</span>
+    </div>
+
+    <div class="progress-bar">
+        <div id="progressFill" class="progress-fill"></div>
+    </div>
+
+    <div class="scan-details">
+        <span id="currentPort">Waiting...</span>
+        <span id="openPorts">Open ports: 0</span>
+    </div>
+
+</div>
+
+        {% if error %}
+
+        <div class="error">
+            {{ error }}
+        </div>
+
+        {% endif %}
+
+    </section>
+
+
+    {% if results %}
+
+    <!-- Statistics -->
+
+    <section class="card">
+
+        <h3>Scan Overview</h3>
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    Target
+                </div>
+
+                <div class="stat-value">
+                    {{ target }}
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    Open Ports
+                </div>
+
+                <div class="stat-value">
+                    {{ results|length }}
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    Scan Status
+                </div>
+
+                <div class="stat-value">
+                    Complete
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Results -->
+
+    <section class="card">
+
+        <div class="results-header">
+
+            <h3>
+                Open Ports
+            </h3>
+
+            <div class="result-count">
+                {{ results|length }} detected
+            </div>
+
+        </div>
+
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Port</th>
+                    <th>State</th>
+                    <th>Service</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for result in results %}
+
+                <tr>
+
+                    <td class="port">
+                        {{ result.port }}
+                    </td>
+
+                    <td>
+                        <span class="open-badge">
+                            {{ result.state }}
+                        </span>
+                    </td>
+
+                    <td class="service">
+                        {{ result.service }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+    {% elif target and not error %}
+
+    <section class="card">
+
+        <div class="empty">
+
+            No open ports were detected in the selected range.
+
+        </div>
+
+    </section>
+
+    {% endif %}
+
+
+    <!-- Responsible Use -->
+
+    <section class="card">
+
+        <h3>Responsible Security Testing</h3>
+
+        <p class="warning">
+
+            <strong>⚠ Authorized testing only.</strong>
+
+            This tool is intended for educational purposes and
+            authorized security testing. Only scan systems that
+            you own or have explicit permission to test.
+
+        </p>
+
+    </section>
+
+
+    <footer>
+
+        CyberScan • Python • Flask • TCP/IP • Socket Programming
+
+    </footer>
+
+</div>
+<section class="card">
+    <h2>Example Scan</h2>
+
+    <p>
+        The scanner was tested safely against the local machine
+        (<strong>127.0.0.1</strong>).
+    </p>
+
+    <div class="example-box">
+        <p><strong>Target:</strong> 127.0.0.1</p>
+        <p><strong>Port Range:</strong> 7995–8005</p>
+        <p><strong>Open Port:</strong> 8000</p>
+        <p><strong>Detected Service:</strong> HTTP Development Server</p>
+        <p><strong>Result:</strong> Scan completed successfully</p>
+    </div>
+</section>
+<section class="card">
+    <h2>Learning Outcomes</h2>
+
+    <ul>
+        <li>Understanding TCP port scanning and network services</li>
+        <li>Using Python socket programming for network connections</li>
+        <li>Understanding IP addresses, ports, and TCP connections</li>
+        <li>Building a cybersecurity tool with Python and Flask</li>
+        <li>Handling user input and validation</li>
+        <li>Identifying commonly associated network services</li>
+        <li>Using Git and GitHub to document and publish a cybersecurity project</li>
+        <li>Applying responsible and authorized security testing practices</li>
+    </ul>
+</section>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
+
