@@ -19,6 +19,7 @@ A beginner-friendly cybersecurity project written in Python that scans TCP ports
 - Socket Programming
 - TCP/IP Networking
 
+
 ## How It Works
 
 The scanner attempts to establish a TCP connection to each port in the specified range.
@@ -32,6 +33,11 @@ Common port numbers are mapped to their commonly associated services, such as:
 - 443 → HTTPS
 - 3306 → MySQL
 - 8000 → HTTP Development Server
+## Screenshot
+
+![Port Scanner Output](scanner-output.png)
+
+The screenshot shows the scanner detecting an open HTTP development server on port 8000 on the local test machine.
 
 ## How to Run
 
